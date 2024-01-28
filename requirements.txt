@@ -1,0 +1,3 @@
+# conda environment set up, include geopandas as that can be tricky
+# conda create --name trends -c conda-forge python=3.10 pip geopandas scikit-learn statsmodels notebook r-base=4.3.2 r-ggplot2
+

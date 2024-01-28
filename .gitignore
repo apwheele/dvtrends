@@ -1,0 +1,5 @@
+# do not upload the data folder
+/data
+*.rds
+
+
