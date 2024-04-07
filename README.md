@@ -11,7 +11,7 @@ The original data files used to conduct analysis are not saved in the github rep
  - [NCVS Concatenated file, 1992-2022](https://www.icpsr.umich.edu/web/ICPSR/studies/38604)
  - [Jacob Kaplan's Concatenated NIBRS Files, 1991-2022](https://www.openicpsr.org/openicpsr/project/118281/version/V9/view)
 
-For the NCVS, I downloaded the R data files. For NIBRS, I downloaded the entire project. Each was placed in the `/data` folder and then unzipped. After this was done, running `tree /f` the data directory looks as follows:
+For the NCVS, I downloaded the R data files. For NIBRS, I downloaded the R data files individually into `/data/NIBRS`. After this was done and files were all unzipped, running `tree /f` the data directory looks as follows:
 
     ├───data
     │   ├───ICPSR_38604-V1

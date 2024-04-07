@@ -1,5 +1,10 @@
 # do not upload the data folder
 /data
+
+# I save a file of relevant papers
+/lit
+
+# None of the R data files, need to go directly to ICPSR
 *.rds
 
 
