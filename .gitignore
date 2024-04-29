@@ -1,4 +1,4 @@
-# do not upload the data folder
+# do not upload the contents of ICPSR and NIBRS data folders
 /data
 
 # I save a file of relevant papers
@@ -8,3 +8,5 @@
 *.rds
 
 
+# I can upload the pop estimates data folder
+~/data/PopEstimates/*

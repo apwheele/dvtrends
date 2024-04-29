@@ -137,7 +137,9 @@ mod <- glm(prep ~ rcs(year,c(1999,2007,2015)) + rcs(age,c(25,40,65)) +
            northeast + midwest + south + west + pop_50_250 + pop_over250,
            data = dva, family = "binomial")
 
-summary(mod)
+sink(file="./paper/reg_output.txt")
+print(summary(mod))
+unlink("./paper/reg_output.txt")
 
 # > summary(mod)
 # 
@@ -214,7 +216,7 @@ ym <- ggplot(data=year_grade, aes(x=year,y=pred)) +
       labs(x='Year',y='Probability',title='Reporting Rates for Dom. Viol.',caption="Aggravated Assault from NCVS") +
       theme_andy()
 
-png(file="YearMargins.png",bg="transparent",height=4,width=6,units="in",res=1000)
+png(file="./paper/YearMargins.png",bg="transparent",height=4,width=6,units="in",res=1000)
 ym
 dev.off()
 
@@ -239,7 +241,7 @@ am <- ggplot(data=age_grade, aes(x=age,y=pred)) +
       labs(x='Age',y='Probability',title='Reporting Rates for Dom. Viol.',caption="Aggravated Assault from NCVS") +
       theme_andy()
 
-png(file="AgeMargins.png",bg="transparent",height=4,width=6,units="in",res=1000)
+png(file="./paper/AgeMargins.png",bg="transparent",height=4,width=6,units="in",res=1000)
 am
 dev.off()
 

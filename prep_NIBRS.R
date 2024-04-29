@@ -15,6 +15,7 @@ base_admin <- paste0(base_data,"nibrs_1991_2022_administrative_segment_rds/nibrs
 base_arrest <- paste0(base_data,"nibrs_1991_2022_arrestee_segment_rds/nibrs_arrestee_segment_")
 base_groupb <- paste0(base_data,"nibrs_1991_2022_group_b_arrest_report_segment_rds/nibrs_group_b_arrest_report_segment_")
 dvstr <- "domestic violence (historically called lovers triangle/quarrel)"
+mnt_vec <- c("01","02","03","04","05","06","07","08","09","10","11","12")
 
 # get the population data
 ori_pop <- read.csv("./data/PopEstimates/ORI_Pop.csv")
@@ -24,12 +25,21 @@ rownames(ori_pop) <- ori_pop$ori
 load("./data/model.RData")
 
 # this function preps the NIBRS data files to be the same
-# format as the 
+# format as the NCVS model
 
 prep_nibrs <- function(year){
     # read in data
     nvic <- readRDS(file=paste0(base_vic,year,".rds"))
-    nvic$year <- year # not sure why any missing here
+    # so I do not see a months reported, here I only include for 
+    # agencies that had at least one reported victimization in each month for the incident date
+    mnths <- substring(nvic$incident_date,6,7)
+    mnth_dum <- as.data.frame(model.matrix(~mnths-1,data=data.frame(mnths)))
+    onames <- names(mnth_dum)
+    mnth_dum$ori <- nvic$ori
+    mnth_ori <- aggregate(. ~ ori,data=mnth_dum,FUN=max)
+    mnth_ori$mnthRep <- rowSums(mnth_ori[,onames])
+    keep_ori <- unique(mnth_ori[mnth_ori$mnthRep == 12,c('ori')])
+    nvic <- nvic[nvic$ori %in% keep_ori,]
     # I only need the DV aggravated assault cases
     dvc <- rowSums(nvic[,c("agg_assault_homicide_circumsta1","agg_assault_homicide_circumsta2")] == dvstr, na.rm=TRUE)
     nvic <- nvic[dvc > 0,]
@@ -113,13 +123,18 @@ nvic_data$tot <- 1
 
 # saving the full fitted file and aggregate data
 save(nvic_data,file="./data/fitData.RData")
-
 write.csv(nvic_data,"./data/fitData.csv")
 
 # aggregating to ori/year
 agg_data <- aggregate(cbind(weight,tot) ~ ori + year,FUN=sum,data=nvic_data)
 
-
+# reshaping ori_pop to long
+# this is annoyingly long time!
+#rownames(ori_pop) <- 1:nrow(ori_pop)
+#long_ori <- reshape(ori_pop,direction="long",idvar=c("ori","agency","type"),
+#                    v.names="Pop",varying=names(ori_pop)[4:ncol(ori_pop)],
+#                    timevar="Year")
+#rownames(long_ori) <- 1:nrow(long_ori)
 
 # saving the full fitted file and aggregate data
 save(agg_data,file="./data/aggData.RData")

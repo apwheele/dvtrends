@@ -10,6 +10,7 @@ The original data files used to conduct analysis are not saved in the github rep
 
  - [NCVS Concatenated file, 1992-2022](https://www.icpsr.umich.edu/web/ICPSR/studies/38604)
  - [Jacob Kaplan's Concatenated NIBRS Files, 1991-2022](https://www.openicpsr.org/openicpsr/project/118281/version/V9/view)
+ - LEOKA data on reported population served estimates for PDs, see the readme in the `./data/PopEstimates` folder for details.
 
 For the NCVS, I downloaded the R data files. For NIBRS, I downloaded the R data files individually into `/data/NIBRS`. After this was done and files were all unzipped, running `tree /f` the data directory looks as follows:
 
@@ -37,76 +38,20 @@ For the NCVS, I downloaded the R data files. For NIBRS, I downloaded the R data 
     │   │               38604-0003-Codebook-ICPSR.pdf
     │   │               38604-0003-Data.rda
     │   │
-    │   └───NIBRS
-    │       ├───nibrs_1991_2022_administrative_segment_rds
-    │       │       nibrs_administrative_segment_1991.rds
-    │       │       nibrs_administrative_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_administrative_segment_2021.rds
-    │       │       nibrs_administrative_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_arrestee_segment_rds
-    │       │       nibrs_arrestee_segment_1991.rds
-    │       │       nibrs_arrestee_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_arrestee_segment_2021.rds
-    │       │       nibrs_arrestee_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_group_b_arrest_report_segment_rds
-    │       │       nibrs_group_b_arrest_report_segment_1991.rds
-    │       │       nibrs_group_b_arrest_report_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_group_b_arrest_report_segment_2021.rds
-    │       │       nibrs_group_b_arrest_report_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_offender_segment_rds
-    │       │       nibrs_offender_segment_1991.rds
-    │       │       nibrs_offender_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_offender_segment_2021.rds
-    │       │       nibrs_offender_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_offense_segment_rds
-    │       │       nibrs_offense_segment_1991.rds
-    │       │       nibrs_offense_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_offense_segment_2021.rds
-    │       │       nibrs_offense_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_property_segment_rds
-    │       │       nibrs_property_segment_1991.rds
-    │       │       nibrs_property_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_property_segment_2021.rds
-    │       │       nibrs_property_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_victim_segment_rds
-    │       │       nibrs_victim_segment_1991.rds
-    │       │       nibrs_victim_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_victim_segment_2021.rds
-    │       │       nibrs_victim_segment_2022.rds
-    │       │
-    │       ├───nibrs_1991_2022_window_arrestee_segment_rds
-    │       │       nibrs_window_arrestee_segment_1991.rds
-    │       │       nibrs_window_arrestee_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_window_arrestee_segment_2020.rds
-    │       │       nibrs_window_arrestee_segment_2021.rds
-    │       │
-    │       ├───nibrs_1991_2022_window_exceptional_clearance_segment_rds
-    │       │       nibrs_window_exceptional_clearance_segment_1991.rds
-    │       │       nibrs_window_exceptional_clearance_segment_1992.rds
-    │       │       ...
-    │       │       nibrs_window_exceptional_clearance_segment_2020.rds
-    │       │       nibrs_window_exceptional_clearance_segment_2021.rds
-    │       │
-    │       └───nibrs_1991_2022_window_recovered_property_segment_rds
-    │               nibrs_window_recovered_property_segment_1991.rds
-    │               nibrs_window_recovered_property_segment_1992.rds
-    │               ...
-    │               nibrs_window_recovered_property_segment_2020.rds
-    │               nibrs_window_recovered_property_segment_2021.rds
+    │   ├───NIBRS
+    │   │   └───nibrs_1991_2022_victim_segment_rds
+    │   │          nibrs_victim_segment_1991.rds
+    │   │          nibrs_victim_segment_1992.rds
+    │   │          ...
+    │   │          nibrs_victim_segment_2021.rds
+    │   │          nibrs_victim_segment_2022.rds
+    │   │
+    │   └───PopEstimates
+    │              ORI_Pop.csv
+
+# How to replicate
+
+Once the data and R environment has been set up, run `pred_model.R`, and then run `prep_NIBRS.R`.
 
 
 # ToDo
