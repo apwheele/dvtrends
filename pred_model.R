@@ -183,6 +183,23 @@ unlink("./paper/reg_output.txt")
 # 
 # Number of Fisher Scoring iterations: 4
 
+# calibration to show goodness of fit
+dva$prob <- predict(mod,type='response')
+dva$cuts <- cut2(dva$prob,g=10)
+dva$tot <- 1
+fitdf <- aggregate(cbind(prep,prob,tot) ~ cuts,data=dva,FUN=sum)
+# > fitdf
+#             cuts prep      prob tot
+# 1  [0.308,0.561)   74  75.37758 153
+# 2  [0.561,0.611)   95  89.81912 153
+# 3  [0.611,0.643)   91  96.11318 153
+# 4  [0.643,0.668)  104 101.72074 155
+# 5  [0.668,0.686)   95 101.56610 150
+# 6  [0.686,0.702)  109 106.12110 153
+# 7  [0.702,0.719)  116 107.98061 152
+# 8  [0.719,0.741)  105 111.68919 153
+# 9  [0.741,0.776)  122 117.24676 155
+# 10 [0.776,0.886]  118 121.36563 150
 
 # saving R objects
 save(dva,mod,file="./data/model.RData")

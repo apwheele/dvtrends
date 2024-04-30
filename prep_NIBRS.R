@@ -1,6 +1,8 @@
 # prepping the NIBRS data
 library(rms) # for restricted cubic splines
 
+years <- 1992:2022
+
 # Region states
 northeast <- c("CT","ME","MA","NH","RI","VT","NJ","NY","PA")
 midwest <- c("IL","IN","MI","OH","WI","IA","KS","MN","MO","NE","SD","ND")
@@ -9,13 +11,8 @@ west <- c("WA","OR","CA","MT","ID","WY","NV","UT","CO","AZ","NM","AK","HI")
 
 
 base_data <- "./data/NIBRS/"
-base_off <- paste0(base_data,"nibrs_1991_2022_offense_segment_rds/nibrs_offense_segment_")
 base_vic <- paste0(base_data,"nibrs_1991_2022_victim_segment_rds/nibrs_victim_segment_")
-base_admin <- paste0(base_data,"nibrs_1991_2022_administrative_segment_rds/nibrs_administrative_segment_")
-base_arrest <- paste0(base_data,"nibrs_1991_2022_arrestee_segment_rds/nibrs_arrestee_segment_")
-base_groupb <- paste0(base_data,"nibrs_1991_2022_group_b_arrest_report_segment_rds/nibrs_group_b_arrest_report_segment_")
 dvstr <- "domestic violence (historically called lovers triangle/quarrel)"
-mnt_vec <- c("01","02","03","04","05","06","07","08","09","10","11","12")
 
 # get the population data
 ori_pop <- read.csv("./data/PopEstimates/ORI_Pop.csv")
@@ -94,7 +91,7 @@ prep_nibrs <- function(year){
     # keep variables
     mvars <- c('year','female','age','white','black','nat','asa_isl','mult','hisp',
            'northeast','midwest','south','west','miss_region','pop_under50','pop_50_250','pop_over250')
-    keep_var <- c("ori","state_abb","incident_date","unique_incident_id",mvars)
+    keep_var <- c("ori","state_abb","incident_date","unique_incident_id","pop",mvars)
     # only returning those data I want
     mis_dat = is.na(nvic$ori)
     return(nvic[!mis_dat,keep_var])
@@ -102,7 +99,6 @@ prep_nibrs <- function(year){
 
 
 # getting all the data
-years <- 1992:2022
 res <- vector(mode="list",length=length(years))
 for (i in 1:length(years)) {
     y <- years[i]
@@ -122,8 +118,8 @@ nvic_data$weight <- 1/nvic_data$prob
 nvic_data$tot <- 1
 
 # saving the full fitted file and aggregate data
-save(nvic_data,file="./data/fitData.RData")
-write.csv(nvic_data,"./data/fitData.csv")
+saveRDS(nvic_data,file="./data/fitData.rds")
+write.csv(nvic_data,"./data/fitData.csv",row.names=FALSE)
 
 # aggregating to ori/year
 agg_data <- aggregate(cbind(weight,tot) ~ ori + year,FUN=sum,data=nvic_data)
@@ -137,5 +133,5 @@ agg_data <- aggregate(cbind(weight,tot) ~ ori + year,FUN=sum,data=nvic_data)
 #rownames(long_ori) <- 1:nrow(long_ori)
 
 # saving the full fitted file and aggregate data
-save(agg_data,file="./data/aggData.RData")
-write.csv(nvic_data,"./data/aggData.csv")
+save(agg_data,file="./data/aggData.rds")
+write.csv(agg_data,"./data/aggData.csv",row.names=FALSE)

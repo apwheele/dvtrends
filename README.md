@@ -4,7 +4,7 @@ Council on Criminal Justice supported work, examining domestic violence trends o
 
 # Project Set Up
 
-# Data Sources
+## Data Sources
 
 The original data files used to conduct analysis are not saved in the github repo. They can be found at:
 
@@ -49,18 +49,23 @@ For the NCVS, I downloaded the R data files. For NIBRS, I downloaded the R data 
     │   └───PopEstimates
     │              ORI_Pop.csv
 
-# How to replicate
+## How to replicate
 
-Once the data and R environment has been set up, run `pred_model.R`, and then run `prep_NIBRS.R`.
+Once the data and R environment has been set up (it only relies on rms and ggplot2, the rest is base R), run the scripts in this order:
 
+ 1) `pred_model.R`
+ 2) `prep_NIBRS.R`
+ 3) `ori_graphs.R`
 
 # ToDo
 
- - Script to make files in easier format to work with
- - Identify demographic variables in NCVS overlap with NIBRS
-   - person level: sex, age, race
-   - geo: urban/rural, state
-   - time: year, month
+Identify more variables that overlap NCVS/NIBRS
+
+   - attempted
+   - weapon
+   - expand to multiple crime types, not just agg assault
+
+Make a nicer web application to dropdown and see a cities metrics.
 
 # Researchers
 
