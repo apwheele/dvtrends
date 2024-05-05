@@ -71,7 +71,7 @@ prep_ori <- function(ori,n_sims=1000,ci_probs=c(0.01,0.99)){
     return(agg_ori)
 }
 
-count_graph <- function(data,file_name,height=5,width=10,res=1000) {
+count_graph <- function(data,file_name,title=data$agency[1],height=5,width=10,res=1000) {
     # Added count graph
     tall1 <- data[,c("year","tot")]
     tall1$group <- "Reported"
@@ -79,11 +79,11 @@ count_graph <- function(data,file_name,height=5,width=10,res=1000) {
     names(tall2) <- c("year","tot")
     tall2$group <- "Underreported"
     tall <- rbind(tall1,tall2)
-    tall$group <- factor(tall$group,cc("Underreported","Reported"))
+    tall$group <- factor(tall$group,c("Underreported","Reported"))
     p <- ggplot(tall,aes(x=year,y=tot,fill=group)) +
          geom_bar(position="stack",stat="identity",color="black") +
          scale_fill_manual(values = c("#dd1c77","#f1eef6"), name="") + 
-         labs(x='Year',y='Counts',title=data$agency[1],
+         labs(x='Year',y='Counts',title=title,
               caption='Aggravated Domestic Assault Estimates') +
          theme_andy()
     png(file=file_name,bg="transparent",height=height,width=width,units="in",res=1000)
@@ -93,10 +93,10 @@ count_graph <- function(data,file_name,height=5,width=10,res=1000) {
 }
 
 # Rates with errors over time
-rate_graph <- function(data,file_name,height=5,width=8,res=1000) {
+rate_graph <- function(data,file_name,title=data$agency[1],height=5,width=8,res=1000) {
     p <- ggplot(data,aes(x=year,y=WeightRate,ymin=LowRate,ymax=HighRate)) +
          geom_ribbon(fill="#dd1c77",alpha=0.9) +
-         labs(x='Year',y='Rate per 100,000',title=data$agency[1],
+         labs(x='Year',y='Rate per 100,000',title=title,
               caption='Aggravated Domestic Assault Estimates') +
          theme_andy()
     png(file=file_name,bg="transparent",height=height,width=width,units="in",res=1000)
@@ -107,31 +107,31 @@ rate_graph <- function(data,file_name,height=5,width=8,res=1000) {
 
 
 memphis <- prep_ori("TNMPD0000")
-p <- count_graph(memphis,"./paper/MemphisCount.png")
-p <- rate_graph(memphis,"./paper/MemphisRate.png")
+p <- count_graph(memphis,"./paper/MemphisCount.png","Memphis")
+p <- rate_graph(memphis,"./paper/MemphisRate.png","Memphis")
 
 detroit <- prep_ori("MI8234900")
-p <- count_graph(detroit,"./paper/DetroitCount.png")
-p <- rate_graph(detroit,"./paper/DetroitRate.png")
+p <- count_graph(detroit,"./paper/DetroitCount.png","Detroit")
+p <- rate_graph(detroit,"./paper/DetroitRate.png","Detroit")
 
 denver <- prep_ori("CODPD0000")
-p <- count_graph(denver,"./paper/DenverCount.png")
-p <- rate_graph(denver,"./paper/DenverRate.png")
+p <- count_graph(denver,"./paper/DenverCount.png","Denver")
+p <- rate_graph(denver,"./paper/DenverRate.png","Denver")
 
 
 honolulu <- prep_ori("HI0020000")
-p <- count_graph(honolulu,"./paper/HonoluluCount.png")
-p <- rate_graph(honolulu,"./paper/HonoluluRate.png")
+p <- count_graph(honolulu,"./paper/HonoluluCount.png","Honolulu")
+p <- rate_graph(honolulu,"./paper/HonoluluRate.png","Honolulu")
 
 
 beaufort <- prep_ori("SC0070000")
-p <- count_graph(beaufort ,"./paper/BeaufortCount.png")
-p <- rate_graph(beaufort ,"./paper/BeaufortRate.png")
+p <- count_graph(beaufort ,"./paper/BeaufortCount.png","Beaufort County")
+p <- rate_graph(beaufort ,"./paper/BeaufortRate.png","Beaufort County")
 
 
 saltlake <- prep_ori("UT0180300")
-p <- count_graph(saltlake,"./paper/SaltLakeCount.png")
-p <- rate_graph(saltlake,"./paper/SaltLakeRate.png")
+p <- count_graph(saltlake,"./paper/SaltLakeCount.png","Salt Lake")
+p <- rate_graph(saltlake,"./paper/SaltLakeRate.png","Salt Lake")
 
 
 # Make a graph, 20 largest cities
