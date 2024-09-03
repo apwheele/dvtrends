@@ -82,7 +82,7 @@ count_graph <- function(data,file_name,title=data$agency[1],height=5,width=10,re
     tall$group <- factor(tall$group,c("Underreported","Reported"))
     p <- ggplot(tall,aes(x=year,y=tot,fill=group)) +
          geom_bar(position="stack",stat="identity",color="black") +
-         scale_fill_manual(values = c("#dd1c77","#f1eef6"), name="") + 
+         scale_fill_manual(values = c("#66bac9","#8893ca"), name="") + 
          labs(x='Year',y='Counts',title=title,
               caption='Aggravated Domestic Assault Estimates') +
          theme_andy()
@@ -92,10 +92,14 @@ count_graph <- function(data,file_name,title=data$agency[1],height=5,width=10,re
     return(p)
 }
 
+# orig "#dd1c77","#f1eef6"
+# new 66bac9
+
 # Rates with errors over time
 rate_graph <- function(data,file_name,title=data$agency[1],height=5,width=8,res=1000) {
     p <- ggplot(data,aes(x=year,y=WeightRate,ymin=LowRate,ymax=HighRate)) +
-         geom_ribbon(fill="#dd1c77",alpha=0.9) +
+         geom_ribbon(fill="#66bac9",alpha=0.9) + 
+         expand_limits(y=0) +
          labs(x='Year',y='Rate per 100,000',title=title,
               caption='Aggravated Domestic Assault Estimates') +
          theme_andy()
@@ -118,20 +122,21 @@ denver <- prep_ori("CODPD0000")
 p <- count_graph(denver,"./paper/DenverCount.png","Denver")
 p <- rate_graph(denver,"./paper/DenverRate.png","Denver")
 
-
 honolulu <- prep_ori("HI0020000")
 p <- count_graph(honolulu,"./paper/HonoluluCount.png","Honolulu")
 p <- rate_graph(honolulu,"./paper/HonoluluRate.png","Honolulu")
-
 
 beaufort <- prep_ori("SC0070000")
 p <- count_graph(beaufort ,"./paper/BeaufortCount.png","Beaufort County")
 p <- rate_graph(beaufort ,"./paper/BeaufortRate.png","Beaufort County")
 
-
 saltlake <- prep_ori("UT0180300")
 p <- count_graph(saltlake,"./paper/SaltLakeCount.png","Salt Lake")
 p <- rate_graph(saltlake,"./paper/SaltLakeRate.png","Salt Lake")
+
+lubbock <- prep_ori("TX1520200")
+p <- count_graph(lubbock,"./paper/LubbockCount.png","Lubbock")
+p <- rate_graph(lubbock,"./paper/LubbockRate.png","Lubbock")
 
 
 # Make a graph, 20 largest cities
@@ -141,6 +146,7 @@ up2022 <- up2022[order(up2022$weight),]
 rownames(ori_pop) <- ori_pop$ori
 up2022$agency <- ori_pop[up2022$ori,c("agency")]
 up2022 <- up2022[,c("ori","agency","weight","tot")]
+write.csv(up2022,"up2022.csv",row.names=FALSE)
 up2022 <- tail(up2022,20)
 up2022$agency <- gsub("POLICE DEPARTMENT","",up2022$agency)
 up2022$agency <- gsub("PD","",up2022$agency)
@@ -153,7 +159,7 @@ p <- ggplot(up2022) +
      geom_segment(aes(x=tot,xend=weight,y=agency,yend=agency)) + 
      geom_point(aes(x=tot,y=agency,fill="Reported"),pch=21,color="black",size=5.5) +
      geom_point(aes(x=weight,y=agency,fill="Underreported"),pch=21,color="black",size=5.5) +
-     scale_fill_manual(values = c("#f1eef6","#dd1c77"), name="") +
+     scale_fill_manual(values = c("#8893ca","#66bac9"), name="") +
      labs(x='Domestic Violence Counts',y="",title="Top 20 Cities with Most Domestic Violence",
           caption='Aggravated Assault Estimates') +
      theme_andy() +
@@ -162,3 +168,28 @@ p <- ggplot(up2022) +
 png(file="./paper/TopCities2022.png",bg="transparent",height=6,width=10,units="in",res=1000)
 print(p)
 dev.off()
+
+
+# Get top 200, generate data, combine data
+tot_rep <- 50
+up2022 <- aggregate(cbind(weight,tot) ~ ori,data=vic[vic$year == 2022,],FUN=sum)
+up2022 <- up2022[order(up2022$weight),]
+rownames(ori_pop) <- ori_pop$ori
+up2022$agency <- ori_pop[up2022$ori,c("agency")]
+up2022 <- up2022[,c("ori","agency","weight","tot")]
+up2022 <- up2022[up2022$tot > tot_rep,]
+
+tot_n <- dim(up2022)[1]
+res <- vector(mode="list",length=tot_n)
+for (i in 1:tot_n){
+    ori <- up2022$ori[i]
+    ld <- prep_ori(ori)
+    ld$ori <- ori
+    res[[i]] <- ld
+}
+
+res_topk <- do.call("rbind",res)
+write.csv(res_topk,"TrendsOver50.csv",row.names=FALSE)
+
+# quite ugly
+ggplot(res_topk, aes(x = year, y = WeightRate, group = agency)) + geom_line() + theme_andy()

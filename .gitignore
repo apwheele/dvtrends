@@ -11,6 +11,6 @@
 # I can upload the pop estimates data folder
 ~/data/PopEstimates/*
 
-
+*.docx
 /paper/Old
 /paper/Piquero*

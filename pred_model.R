@@ -229,7 +229,7 @@ year_grade <- data.frame(year=margin_year,pred=margin_prob,obs=rep_perc$prep,tot
 ym <- ggplot(data=year_grade, aes(x=year,y=pred)) + 
       geom_line(size=1.6) +
       scale_x_continuous(breaks=seq(1992,2022,5)) +
-      scale_y_continuous(breaks=seq(0.6,0.74,0.02)) + 
+      scale_y_continuous(breaks=seq(0.0,0.80,0.1), limits=c(0.0,0.8)) + 
       labs(x='Year',y='Probability',title='Reporting Rates for Dom. Viol.',caption="Aggravated Assault from NCVS") +
       theme_andy()
 
@@ -254,7 +254,7 @@ age_grade <- data.frame(age=margin_age,pred=margin_prob)
 am <- ggplot(data=age_grade, aes(x=age,y=pred)) + 
       geom_line(size=1.6) +
       scale_x_continuous(breaks=seq(10,90,5)) +
-      scale_y_continuous(breaks=seq(0.53,0.73,0.02)) + 
+      scale_y_continuous(breaks=seq(0.0,0.8,0.1), limits=c(0.0,0.8)) + 
       labs(x='Age',y='Probability',title='Reporting Rates for Dom. Viol.',caption="Aggravated Assault from NCVS") +
       theme_andy()
 
