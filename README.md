@@ -1,6 +1,6 @@
 # Domestic Violence Trends
 
-Council on Criminal Justice supported work, examining domestic violence trends over time.
+[Council on Criminal Justice](https://counciloncj.org/) supported work, examining domestic violence trends over time.
 
 # Project Set Up
 
@@ -57,20 +57,7 @@ Once the data and R environment has been set up (it only relies on rms and ggplo
  2) `prep_NIBRS.R`
  3) `ori_graphs.R`
 
-# ToDo
-
-Identify more variables that overlap NCVS/NIBRS
-
-   - attempted
-   - weapon
-   - expand to multiple crime types, not just agg assault
-
-Make a nicer web application to dropdown and see a cities metrics.
-
 # Researchers
 
-Andrew Wheeler,
-https://crimede-coder.com/
-
-Alex Piquero,
-[University of Miami](https://people.miami.edu/profile/d506d27f83929e0a9839caa0309ae881)
+ - Andrew Wheeler, [Crime De-Coder](https://crimede-coder.com/)
+ - Alex Piquero, [University of Miami](https://people.miami.edu/profile/d506d27f83929e0a9839caa0309ae881)
