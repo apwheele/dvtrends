@@ -1,6 +1,7 @@
 # This illustrates creating graphs of different ORIs
 library(ggplot2)
 library(stringr)
+library(svglite)
 
 vic <- readRDS(file="./data/fitData.rds")
 ori_pop <- read.csv("./data/PopEstimates/ORI_Pop.csv")
@@ -96,12 +97,12 @@ count_graph <- function(data,file_name,title=data$agency[1],height=5,width=10,re
 # new 66bac9
 
 # Rates with errors over time
-rate_graph <- function(data,file_name,title=data$agency[1],height=5,width=8,res=1000) {
+rate_graph <- function(data,file_name,title=data$agency[1],height=5,width=8,res=1000,caption='Aggravated Domestic Assault Estimates') {
     p <- ggplot(data,aes(x=year,y=WeightRate,ymin=LowRate,ymax=HighRate)) +
          geom_ribbon(fill="#66bac9",alpha=0.9) + 
          expand_limits(y=0) +
          labs(x='Year',y='Rate per 100,000',title=title,
-              caption='Aggravated Domestic Assault Estimates') +
+              caption=caption) +
          theme_andy()
     png(file=file_name,bg="transparent",height=height,width=width,units="in",res=1000)
     print(p)
@@ -121,6 +122,9 @@ p <- rate_graph(detroit,"./paper/DetroitRate.png","Detroit")
 denver <- prep_ori("CODPD0000")
 p <- count_graph(denver,"./paper/DenverCount.png","Denver")
 p <- rate_graph(denver,"./paper/DenverRate.png","Denver")
+p <- rate_graph(denver,"./paper/DenverRate_NoTitle.png","",caption="")
+ggsave("DR.svg",p,width=8,height=5)
+
 
 honolulu <- prep_ori("HI0020000")
 p <- count_graph(honolulu,"./paper/HonoluluCount.png","Honolulu")
@@ -137,6 +141,8 @@ p <- rate_graph(saltlake,"./paper/SaltLakeRate.png","Salt Lake")
 lubbock <- prep_ori("TX1520200")
 p <- count_graph(lubbock,"./paper/LubbockCount.png","Lubbock")
 p <- rate_graph(lubbock,"./paper/LubbockRate.png","Lubbock")
+p <- rate_graph(lubbock,"./paper/Lubbock_NoTitle.png","",caption="")
+ggsave("LK.svg",p,width=8,height=5)
 
 
 # Make a graph, 20 largest cities
