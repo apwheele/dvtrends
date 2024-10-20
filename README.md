@@ -1,6 +1,10 @@
-# Domestic Violence Trends
+# Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence
 
-[Council on Criminal Justice](https://counciloncj.org/) supported work, examining domestic violence trends over time.
+Authors: Andrew P. Wheeler, PhD, Crime De-Coder LLC, Alex Piquero, University of Miami
+
+[Pre-print](https://www.crimrxiv.com/pub/wed2u5af/release/1), [Council on CJ whitepaper](https://counciloncj.org/toward-a-better-estimate-of-domestic-violence-in-america/)
+
+Work supported by the [Council on Criminal Justice](https://counciloncj.org/).
 
 # Project Set Up
 
