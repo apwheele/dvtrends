@@ -1,0 +1,82 @@
+Ref.:  Ms. No. JOEX-D-24-00121
+Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence
+Journal of Experimental Criminology
+
+Dear Prof. Piquero,
+
+Your manuscript has been reviewed.  Based on the reviewers’ comments, I regret to inform you that we are declining the opportunity to further consider your manuscript.  The reviewers' comments can be found at the end of this email.  
+
+As you may know, the Journal of Experimental Criminology has become an increasingly popular journal, with an exponential increase in submissions over the last few years. We have extremely limited space to publish worthy submissions.  You may wish to consider submitting your manuscript to an alternative outlet such as Justice Quarterly.
+
+I wish you the best as you seek an alternative publication outlet for your work.  Thank you for the opportunity to consider your manuscript.  Please continue to keep the Journal of Experimental Criminology in mind for future submissions.
+
+Yours sincerely
+
+Wesley Jennings, PhD
+Editor-in-Chief
+Journal of Experimental Criminology
+
+Reviewers' comments:
+
+Reviewer #1: Notes to authors
+JOEX-D-24-00121
+Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence
+
+Thank you for the opportunity to review manuscript JOEX-D-24-00121: "Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence." The manuscript uses multiple data sources including NIBRS and the NCVS to better understand the dark figure of crime and the prevalence of crime among cities and subnational units, particularly as it relates to domestic violence. The manuscript fits within the scope of the Journal of Experimental Criminology and offers interesting understandings into the topic of prevalence of domestic violence and the dark figure of crime. After careful review, I offer the following feedback. Where relevant, page numbers and direct quotes are provided.
+
+General: the authors should carefully proofread the manuscript for spelling and grammar.
+
+General: the Authors should carefully review all in-text citations and references to ensure that all are consistently formatted and ordered throughout the manuscript.
+
+Page 1: "Still this crime type remains one of the most difficult and perplexing to examine due to varying definitions of what constitutes domestic violence, underreporting of domestic violence to law enforcement, and challenges stemming from the existence of multiple avenues of reporting and multiple agencies that receive reports." The authors should provide in-text citations to support the claims made in this sentence. Moreover, the authors should highlight the potential varying definitions of domestic violence across agencies and reporting bodies, especially given that the analysis features two sources of data which likely employ different definitions of domestic violence. At a minimum, the NCVS and NIBRS definitions should be included.
+
+Page 3: the authors highlight the potential for a significant portion of reports relating to domestic violence to be made through informal channels such as pastors, emergency room staff, domestic violence shelters, etc. Despite this, no attempt to account for these reporting is made within the methodology, which instead relies on data from the NCVS and NIBRS. Given the significant portion of reports made through informal channels as the authors suggest, this is a significant limitation that should be more explicitly addressed. Further, language throughout the manuscript which suggests a "true prevalence" should be tempered, given that the failure to systematically account for these informal reports undermines the ability to understand the "true" prevalence of these crimes through strictly the use of NIBRS and the NCVS.
+
+Page 3: the last two sentences on page 3 appear to have been intended to be a single sentence, and the period separating them appears to have been intended to be a comma based on the wording.
+
+Page 4: "This case we focus on aggravated domestic violence…" First, the authors should reword to say "In this case study we focus on aggravated domestic violence." Second, the authors should explain what is meant explicitly by the term "aggravated domestic violence," as this is the first instance of this phrase within the manuscript and is a key focus of the analysis. Relatedly, given research suggesting that domestic violence is multifaceted and can involve physical, sexual, emotional, psychological, and financial abuse, the authors should carefully clarify and justify why the focus appears to be exclusively upon physical domestic violence, and why the exclusion of these other cases does not undermine the described goal of revealing the "dark figure" of domestic violence and the "true prevalence" of this crime type. By examining only one facet of domestic violence at the expense of all others, are the authors really providing a "true prevalence" of this crime across
+cities?
+
+I am curious if the authors technique for producing subnational estimates differs from simply using the subnational estimates provided by the NCVS directly and comparing these to the NIBRS data. (See: https://urldefense.com/v3/__https://bjs.ojp.gov/subnational-estimates-program__;!!KVu0SnhVq1hAFvslES2Y!P_x54L0u5y9N7CFj1baJvfw0NEgWVXFNaX4XzOKem6LduCBEG_zJkXBjMXORp0_VF8_tkWO7qcaQxYuwoQ$ )
+
+Page 9: "the sample is restricted to all those victims who reported having an aggravated domestic violent incident." First, replace "violent" with "violence." Second, the authors should clarify to whom the victims reported their domestic violence within this sentence.
+
+Page 9: Unless I am mistaken, the reference period for all NCVS reporting is 6 months while the NIBRS data reflects annual estimates. Do the authors make any attempt to account for the varied reference periods across data sources used? If so, the authors should more explicitly explain this process.
+
+Page 9: the authors identify several sociodemographic factors which may influence odds of disclosing victimization, including sex, ethnicity, race, and geographic region. Despite this, it stands to reason that other sociodemographic measures present in both data sources may similarly influence reporting. Beyond sociodemographic factors, it stands to reason that incident-related characteristics (i.e., presence of a weapon, injuries suffered, presence of others who witnessed victimization, etc.) may also influence reporting. The authors make no attempt to account for incident-level factors in the analytic strategy employed here, potentially biasing results and undermining the utility of the study given its goal of revealing the true prevalence of domestic violence.
+
+Page 10: "Those who multi-race…" consider rewording to "Those who were of multiple races"
+
+Page 10: the authors indicate a placement for figure 2 at the bottom of the page (i.e., *Figure 2 about here*) but there is no indication of where figure 1 should be placed within the manuscript.
+
+Page 10: the authors should acknowledge the limitation of the NCVS only capturing victimization data for household respondents aged 12 and older. In so doing, the NCVS fails to capture victimization data for those younger than 12, potentially undermining the utility of the data. While this likely is of limited impact as it relates to aggravated domestic violence, this age disparity across data sources dramatically undermines the utility of this approach for other crimes, and should be more carefully addressed within the limitation section. Relatedly, given that the NCVS is restricted to household settings certain populations are excluded from the design, including crewmembers of maritime vessels; armed forces personnel living in military barracks; the homeless; institutionalized persons, such as correctional facility inmates; U.S. citizens residing abroad; and foreign visitors to the United States. Given this design, the failure to account for aggravated domestic violence
+occurring among these populations similarly undermines the goal of the study of revealing the "true prevalence" of domestic violence in the United States.
+
+Page 11: Some police jurisdictions also cover more than just a city - Las Vegas metro police department covers all of Clark County, not just Las Vegas Proper." First, capitalize to "Metro Police Department." Second, in some states all sworn law enforcement personnel have a "general authority" to make an arrest across the entirety of the state, not just the specific jurisdiction associated with their agency. Is this accounted for within the methodology?
+
+The authors provide subnational estimates for several cities. The authors should provide a clearer rationale for why these specific cities were chosen and not others.
+
+Reviewer #2: Review for Journal of Experimental Criminology (JOEX-D-24-00121)
+
+First, this appears to be a very odd journal to submit this paper to. Besides experimental methods (and by "experimental" I mean untested and unconfirmed, not relating to scientific experiments), I do not see this fitting into the Journal of Experimental Criminology. Second, my main concern is that the authors use national-level rates of unreported domestic violence (DV) to the police to estimate city-specific rates of domestic violence not reported to the police. This is not advisable, and research has shown is likely very inaccurate. And to make matters worse, the authors spend considerable time in the back end of the manuscript not explaining their limitations, but with a discussion of how this analysis could be extended and expanded (including in footnote #5 the authors say this methodology could be expanded to smaller neighborhoods. No!) What makes the U.S. representative of a given city on rates of violence unreporting? Variation exists across the U.S. in rates of
+violence reporting. And much of this variation is lost by using only a few variables to estimate rates of unreported DV assault--a rare victimization in the U.S. when disaggregating cells by so many additional factors in your models (e.g., sex, race, geographic region, population group, victim/offender relationship/ONE VIOLENT CRIME TYPE).
+
+Moreover, the authors use Rezey & Lauritsen (2023) as a justification of this city-specific analysis, but Rezey & Lauritsen (2023) used Chicago-specific NCVS data available in the NCVS. Rezey & Lauritsen (2023) also did not look at DV or any further disaggregation of serious violence in Chicago, as it would have been impossible given the low unweighted cell sizes using the NCVS to study serious violence occurring to residents of a specific city (the only reason it was possible to study Chicago was because Chicago is currently the only large city in the Midwest region with over 2 million people (no other city in the U.S. can be isolated in this way—even in years prior to their study Detroit had a greater population thus confounding the Chicago data).
+
+If the authors had used the 1992-2022 concatenated NCVS files (as the write in footnote #4—ICPSR #38604), 2022 complete year incident data are not even available in the file. This file has the 2022 NCVS interview year data complete, but not the 2022 NCVS incident year data complete. The authors would need to use the next year of data (2023) to get the 2022 incident year data. Recall the NCVS asks individuals about victimization experiences over the last 6 months. Therefore, one to six months into 2023 respondents are reporting for 2022 victimizations. Incident year data must be used when comparing any NCVS data to police incident files. Therefore, I do not trust any of the NCVS incident data that you pulled--and the 2022 NCVS data are not comparable with the NIBRS data from 2022.
+
+It appears that the authors use technical jargon more than informative details about the validity and reliability of this analysis.
+
+Moreover, city populations increase and decrease over time, potentially moving cities (and their residents) from one population group to another after each decennial Census. In the 6th year of each decade, the previous decennial Census is used to adjust the sampling frame by BJS and the Census Bureau. Therefore, throughout the trend series, residents in cities that moved from population group to population group are now only being treated as being in the population group that city fell in during 2022.
+
+Nowhere do the authors explain how they ascertained a domestic violence aggravated assault in the study. Information in the Data and Methods section about how each variable was operationalized is missing but required. The NCVS may seem easy to use to someone who knows modelling, but unless you know all the NCVS’s idiosyncrasies, you are likely making big errors in your analysis. What was the victim/offender relationship that the authors used to determine a DV assault? Were these both attempted and complete assaults?
+
+So many of these limitations are not discussed in the manuscript.
+
+Reviewer #3: This manuscript aims to provide sub-national estimates of domestic violence. The authors combine NIBRS and the NCVS to analyze the degree of underreporting of domestic violence and use that to adjust official estimates of domestic violence upwards.
+
+The fundamental flaw in this study is the assumption that the national reporting rate of the NCVS can be applied to smaller geographic areas. Reporting of domestic violence is unlikely to be invariant across geographic regions and jurisdictions. Whereas the authors consider variation along the lines of age and other demographics, there are unobserved factors that account for reporting of domestic violence. For example, the availability of domestic violence shelters and resources, laws pertaining to domestic violence (e.g., presumptive arrest), and neighborhood sentiments associated with police legitimacy are all factors that may be associated with police reporting and vary meaningfully across geographic areas. The assumption that demographic factors alone can be used to accurately adjust area-level domestic violence rates does not reflect the empirical literature on factors that are relevant to understanding domestic violence reporting.
+
+Adding to this is the concern that the NCVS has been criticized for its failure to adequately estimate violent victimization in rural areas. Indeed, the sampling frame was adjusted several years ago to address this deficit, but due to methodological constraints, the resulting estimates could not be reconciled. This again raises the question about how applicable is this method across jurisdictions?
+
+The authors also fail to make use of the weights included in the NCVS which are crucial for estimating rates of reporting and victimization. While they note that the weights are not always used in regression models of the NCVS, that is true when the scope of the analysis is understanding incident-level dynamics. The authors in this study are trying to provide national level rates of reporting based on demographic characteristics. Therefore, the use of the sampling weights is necessary.

@@ -104,10 +104,12 @@ dva$pop_under50 <- pop_under50
 dva$pop_50_250 <- pop_50_250
 dva$pop_over250 <- pop_over250
 
+dva$person_weight <- dva$V3080
+
 # Variables you need for prediction
 mvars <- c('prep','year','female','age','white','black','nat','asa_isl','mult','hisp',
            'northeast','midwest','south','west','miss_region','pop_under50','pop_50_250',
-           'pop_over250')
+           'pop_over250','person_weight')
 
 dva <- dva[,mvars]
 
@@ -263,3 +265,28 @@ am
 dev.off()
 
 #######################
+# Robustness, fitting model with weights
+# note we do not need to worry about surveyglm
+# since we just use phat, not the standard errors
+# using person weights, V3080
+
+# rescaling
+dva$w <- (dva$person_weight/sum(dva$person_weight))*nrow(dva)
+
+
+modw <- glm(prep ~ rcs(year,c(1999,2007,2015)) + rcs(age,c(25,40,65)) + 
+           female + black + nat + asa_isl + mult + hisp + 
+           northeast + midwest + south + west + pop_50_250 + pop_over250,
+           data = dva,weights=w,family = "binomial")
+
+sink(file="./paper/reg_outputW.txt")
+print(summary(modw))
+unlink("./paper/reg_outputW.txt")
+
+save(modw,file="./data/modelW.RData")
+
+
+# Lets check out the correlation between phat for these two models
+p1 <- predict(mod)
+p2 <- predict(modw)
+cor(cbind(p1,p2)) # over 97%

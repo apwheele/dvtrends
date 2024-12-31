@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Andrew P. Wheeler, PhD">
+<meta name="author" content="Alex Piquero, PhD">
+<meta name="dcterms.date" content="2024-10-20">
+
+<title>Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="DV_paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="DV_paper_files/libs/quarto-html/quarto.js"></script>
+<script src="DV_paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="DV_paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="DV_paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="DV_paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="DV_paper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="DV_paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="DV_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="DV_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="DV_paper.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using Victimization Reporting Rates to Estimate the Dark Figure of Domestic Violence</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Andrew P. Wheeler, PhD </p>
+             <p>Alex Piquero, PhD </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2024-10-20</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>When analyzing crimes reported to police, an ever-present problem is whether characteristics of those reported crimes reflect the true underlying distribution of those crimes. Or if any of the observed patterns are merely reflective of changing patterns of reporting rates over time.</p>
+<p>Traditionally criminologists have addressed this via victimization surveys – asking individuals if they have been victimized. The National Crime Victimization Survey (NCVS) is one such survey in the United States <span class="citation" data-cites="lauritsen2013measuring">(<a href="#ref-lauritsen2013measuring" role="doc-biblioref">Lauritsen and Rezey 2013</a>)</span>. In a year, the NCVS may interview over 40,000 households and 70,000 individuals. Despite being an incredibly large sized survey, generating sub national level estimates is still a challenge. Most of the work is on state level estimates <span class="citation" data-cites="fay2013small">(<a href="#ref-fay2013small" role="doc-biblioref">Fay, Planty, and Diallo 2013</a>)</span>, although some are for metro areas or specific cities <span class="citation" data-cites="rezey2023crime">(<a href="#ref-rezey2023crime" role="doc-biblioref">Rezey and Lauritsen 2023</a>)</span>. Here we will propose a methodology that can more easily generate city (or even sub-city) level results.</p>
+<p>Here we show how one can leverage reported crimes, along with estimated reporting rates of victimization to the police, to produce <em>local</em> estimates of the dark figure of crime. This case study we focus on aggravated domestic violence, although the methodology could be extended to other crime types in future work.</p>
+</section>
+<section id="mathematical-model" class="level1">
+<h1>Mathematical Model</h1>
+<p>We start with two identities, first:</p>
+<p><span class="math display">\[T = R + N\]</span></p>
+<p>Where <span class="math inline">\(T\)</span> is the total number of crimes, <span class="math inline">\(R\)</span> is the count of <em>reported</em> crimes, and <span class="math inline">\(N\)</span> is the count of <em>non-reported</em> crimes. Second, we have:</p>
+<p><span class="math display">\[p = \frac{R}{T} = \frac{R}{R + N}\]</span></p>
+<p>Where <span class="math inline">\(p\)</span> is the probability of reporting the crime to the police, aka the reporting rate. Here crimes are specifically aggravated domestic violent victimization’s, but the mathematical presentation is generic and not specific to only domestic violence.</p>
+<p>The main contribution of this work is that you can estimate <span class="math inline">\(T\)</span>, the total number of crimes, via the observed number of crime reports <span class="math inline">\(R\)</span>, and an estimate of the probability of reporting, what we denote as <span class="math inline">\(\hat{p}\)</span>. So we may wish to estimate two different quantities. First one can estimate <span class="math inline">\(N\)</span> via:</p>
+<p><span class="math display">\[\hat{N} = \frac{R\cdot(1-\hat{p})}{\hat{p}}\]</span></p>
+<p>But here we mostly focus on estimating <span class="math inline">\(\hat{T}\)</span> via:</p>
+<p><span class="math display">\[\hat{T} = R + \frac{R \cdot (1-\hat{p})}{\hat{p}}\]</span> <span class="math display">\[\hat{T} = R/\hat{p}\]</span></p>
+<p>So if you had a city with 500 reported crimes, and the reporting rate estimate for that crime is 40%, the estimate for the total number of crimes in that city is <span class="math inline">\(500/0.4 = 1,250\)</span></p>
+<p>Here we suggest to use the NCVS to estimate <span class="math inline">\(\hat{p}\)</span>. One can observe <span class="math inline">\(R\)</span> via a specific police jurisdictions reporting, such as via the National Incident Based Reporting System (NIBRS).</p>
+<p>This somewhat begs the question of why not use NCVS to estimate <span class="math inline">\(\hat{T}\)</span> directly. In practice if one wants an estimate for a specific city, e.g.&nbsp;I want to know how many total crimes are in Dallas, even given the size of NCVS there are unlikely enough surveys of a particular city to generate reasonably accurate estimate. One however can take the reporting rate from the NCVS, and it is likely a reasonable estimate for the reporting rate for a specific jurisdiction <span class="citation" data-cites="rezey2023crime">(<a href="#ref-rezey2023crime" role="doc-biblioref">Rezey and Lauritsen 2023</a>)</span>.</p>
+<p>If one is willing to run a survey for a specific jurisdiction, it hinges on whether the standard error around <span class="math inline">\(\hat{p}\)</span> versus <span class="math inline">\(\hat{T}\)</span> to determine which estimate you would prefer. There are scenarios where either could be true. For rare crimes, both will require very large sample sizes to get reasonably accurate estimates. Figure 1 shows a simulated example where the <em>reporting</em> rate estimator has a smaller confidence interval once you eclipse a total of 2,000 surveys.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="3200"></p>
+<figcaption>Example estimates for total crimes using survey samples versus the reporting rate. The error ranges represent 95% binomial Clopper-Pearson exact intervals. Based on observed 500 crimes, a victimization rate of 2%, and a reporting rate of 65%.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In practice conducting this exercise filling in reasonable values for victimization rates and reporting rates, they both tend to be very similar in terms of overall crime estimates. And one may even be able to construct a more accurate estimate by combining both (the reporting rate estimate has a better lower bound). But given we are not working with individual city surveys, we leave that to future researchers.</p>
+<p>One could use the overall reporting rate for the entire NCVS to up-adjust observed NIBRS counts in a specific jurisdiction. But there is a more bespoke way to take into account differential composition of the crime reporting demographics for a particular jurisdiction. Consider a breakdown of our total crime estimate into sub-estimates <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<p><span class="math display">\[\hat{T}_a = R_a/\hat{p}_a\]</span> <span class="math display">\[\hat{T}_b = R_b/\hat{p}_b\]</span></p>
+<p>Where our estimate of total crime is <span class="math inline">\(\hat{T} = \sum_{i=1}^{k}\hat{T}_k\)</span> for each <span class="math inline">\(k\)</span> subset.</p>
+<p>Pretend that the subgroups are older and younger victims, and that younger victims have a higher victimization reporting rate. If one city has a larger number of older victims, they should have a higher adjustment. In practice, one can extend this so that <em>every individual reported crime</em> has its own probability estimate of reporting to the police. That is, we have:</p>
+<p><span class="math display">\[\hat{T}_i = R_i/\hat{p}_i\]</span></p>
+<p>Where <span class="math inline">\(i\)</span> can index all the different characteristics for an individual reported crime. We took as motivation for this the literature on post-stratification <span class="citation" data-cites="circo2023using">(<a href="#ref-circo2023using" role="doc-biblioref">Circo and Wheeler 2023</a>)</span>. In that literature, the post-stratification weights are typically taken from census demographics, here the post-stratification weights though are taken from the NIRBS reporting data.</p>
+<p>Here we estimate <span class="math inline">\(\hat{p}_i\)</span>, the reporting rate for <em>aggravated domestic violent assaults</em> using a logistic regression for NCVS using:</p>
+<p><span class="math display">\[g(\hat{p}_i) = \beta_0 + \beta_1\text{Female} + \beta_2\text{Hispanic} + \Sigma\beta_k s(\text{Year}_k) + \Sigma\beta_l s(\text{Age}_l) +\]</span> <span class="math display">\[\Sigma\beta_g\text{Race}_g + \Sigma\beta_h\text{Region}_h + \Sigma\beta_i\text{PopGroup}_i\]</span></p>
+<p>Where the <span class="math inline">\(g\)</span> is the logit function. The model does not include sampling weights in its estimates. Those are typically not included in regression modeling, only for estimating national level rates <span class="citation" data-cites="powers2023self">(<a href="#ref-powers2023self" role="doc-biblioref">Powers and Bleeker 2023</a>)</span>. The sample is restricted to all those victims who reported having an aggravated domestic violent incident.</p>
+<p>The variables included in the logistic regression on the right hand side are whether the victim is female, Hispanic, their racial group (Asian/Pacific Islander, Black, Native American, Two or more races, with white as the reference group), and geographic region (Northeast, Midwest, South, West). For the NCVS, region was only included post 1994, and so for earlier years we use the missing region as the reference category in the regression. For population groups, we include variables for cities of 50,000 to 250,000, another category for over 250,000, and the reference group of cities under 50,000 population.</p>
+<p>The model also includes non-linear restricted cubic spline terms for the victim’s age (with knots at 25, 40, and 65), and year spline variables (with knots at 1999, 2007, 2015). Restricted cubic splines typically have better tail behavior than polynomial terms <span class="citation" data-cites="harrell2001regression">(<a href="#ref-harrell2001regression" role="doc-biblioref">Harrell et al. 2001</a>)</span>.</p>
+<p>It is necessary to use variables that are available in both NCVS and NIBRS to conduct such an analysis, but one can use different methods of estimating <span class="math inline">\(\hat{p}_i\)</span>, such as machine learning. Here we use logistic regression, as in the authors experience the sample size is too small to reliably use non-linear machine learning models, such as random forest or boosted regression models <span class="citation" data-cites="circo2022open">(<a href="#ref-circo2022open" role="doc-biblioref">Circo and Wheeler 2022</a>)</span>. It is also the case that when using generalized linear models, one has an estimate of the standard error of <span class="math inline">\(\hat{p}_i\)</span>, which we use in further data visualizations.</p>
+<p>We use the open source library R to conduct statistical analysis and the library ggplot2 to create graphs <span class="citation" data-cites="rstat ggp">(<a href="#ref-rstat" role="doc-biblioref">R Core Team 2022</a>; <a href="#ref-ggp" role="doc-biblioref">Wickham 2016</a>)</span>. Replication results can be seen at <a href="https://github.com/apwheele/dvtrends" class="uri">https://github.com/apwheele/dvtrends</a>. Data used for the analysis is the concatenated NCVS file, and the NIBRS concatenated files provided by Jacob Kaplan <span class="citation" data-cites="kaplan2022jacob ncvs2022">(<a href="#ref-kaplan2022jacob" role="doc-biblioref">Kaplan 2024</a>; <a href="#ref-ncvs2022" role="doc-biblioref">Justice Statistics 2023</a>)</span>.</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<section id="regression-results" class="level2">
+<h2 class="anchored" data-anchor-id="regression-results">Regression Results</h2>
+<p>First, we describe the regression equation predicting the probability of reporting an aggravated domestic violence assault to the police. The large intercept term is only so large because of the idiosyncratic reference categories we used for the omitted dummy variable (missing region in 1992-1994, non-Hispanic, white, in population under 50,000). Those who multi-race have lower reporting rates, and Hispanics (which is a separate category from race in the NCVS) have higher reporting rates.</p>
+<div class="cell tbl-cap-location-top">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Logistic regression results, predicting the probability of reporting to the police for 1,527 observations in the NCVS sample from 1992 through 2022.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">z value</th>
+<th style="text-align: right;">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Int.</td>
+<td style="text-align: right;">-78.61</td>
+<td style="text-align: right;">42.92</td>
+<td style="text-align: right;">-1.83</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">s1(year)</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">s2(year)</td>
+<td style="text-align: right;">-0.04</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">-1.52</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">s1(age)</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3.60</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">s2(age)</td>
+<td style="text-align: right;">-0.05</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">-2.51</td>
+<td style="text-align: right;">0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">1.23</td>
+<td style="text-align: right;">0.22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">0.37</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Native American</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.81</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Asian/Islander</td>
+<td style="text-align: right;">-0.23</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">-0.53</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multi-Race</td>
+<td style="text-align: right;">-1.19</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">-4.10</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hispanic</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">3.04</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Northeast</td>
+<td style="text-align: right;">-0.10</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">-0.39</td>
+<td style="text-align: right;">0.70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Midwest</td>
+<td style="text-align: right;">-0.20</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">-0.83</td>
+<td style="text-align: right;">0.41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">-0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">-0.44</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">West</td>
+<td style="text-align: right;">-0.24</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">-1.00</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pop. 50k to 250k</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">1.21</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pop. over 250k</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">1.31</td>
+<td style="text-align: right;">0.19</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>It is easier to visualize the changes the reporting rates over time and by years via marginal effect plots. For changes over years, the reporting rate peaked in 2008 at slightly over 70%, and has since been decreasing. For the marginal effects for age, the reporting rate peaks around 40 years old at over 70%, and is lower than 60% for both very young teenagers and individuals over 75 years of age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="3000"></p>
+<figcaption>Marginal Effect of Reporting Rate by Year and by Age</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The regression equation is only important insomuch as it generates accurate probabilities for reporting for said demographics. It does not matter if the demographics have a particular causal interpretation, nor does it matter if the coefficients are statistically significant. To assess the fit of the model, we use a Hosmer-Lemeshow test to illustrate the predicted probabilities are well calibrated <span class="citation" data-cites="agresti2012categorical">(<a href="#ref-agresti2012categorical" role="doc-biblioref">Agresti 2012</a>)</span>.</p>
+<div class="cell tbl-cap-location-top">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Hosmer-Lemeshow calibration table, <span class="math inline">\(\chi^2 = 8.04\)</span> p-value= 0.43</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Prob. Bin</th>
+<th style="text-align: right;">Obs.</th>
+<th style="text-align: right;">Exp.</th>
+<th style="text-align: right;">Samp. Size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[0.308,0.561)</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">75.4</td>
+<td style="text-align: right;">153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[0.561,0.611)</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">89.8</td>
+<td style="text-align: right;">153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[0.611,0.643)</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">96.1</td>
+<td style="text-align: right;">153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[0.643,0.668)</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">101.7</td>
+<td style="text-align: right;">155</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[0.668,0.686)</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">101.6</td>
+<td style="text-align: right;">150</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[0.686,0.702)</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">106.1</td>
+<td style="text-align: right;">153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[0.702,0.719)</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">108.0</td>
+<td style="text-align: right;">152</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[0.719,0.741)</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">111.7</td>
+<td style="text-align: right;">153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[0.741,0.776)</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">117.2</td>
+<td style="text-align: right;">155</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[0.776,0.886]</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">121.4</td>
+<td style="text-align: right;">150</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="estimating-city-level-trends" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-city-level-trends">Estimating City Level Trends</h2>
+<p>First we show a sample of the twenty police jurisdictions with the highest reported totals of aggravated assault domestic violence incidents in NIBRS. Note this sample is both idiosyncratic to what police departments reported to NIBRS in 2022 (New York City for example did not). Some police jurisdictions also cover more than just a city – Las Vegas metro police department covers all of Clark County, not just Las Vegas proper.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The figure shows the original NIBRS counts in the lighter color, and our up-adjusted total estimates as an additional darker color added on the top bars. Thus the darker green color is the estimate of the non-reported aggravated domestic violence assaults. The up-adjusted proportion is typically by around 40%, but in the 2022 data, for jurisdictions with over 50 reported incidents can range from 23% to 76%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="3000"></p>
+<figcaption>Up-adjusted Total Aggravated Domestic Violence, Top 20 Cities in NIBRS 2022 data</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>One can then examine specific cities over time. Here is a graph for Denver, who started reporting to NIBRS in 2005. One can see the overall trends are the same whether examining just the reported crimes or our overall total estimate. But, the overall total estimate shows a greater increase in years post 2015.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="3000"></p>
+<figcaption>Estimates of Total Domestic Aggravated Assaults in Denver</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>One can plot the rates of victimization, here we estimate the variance in our statistical estimator via simulation. Each <span class="math inline">\(\hat{p}_i\)</span> has a standard error, as so we generate 1,000 simulations, randomly generating a simulated estimate of <span class="math inline">\(\hat{p}_i\)</span>, and then aggregate up to our estimate of <span class="math inline">\(\hat{T}\)</span>. The band shown is the 98% confidence interval surrounding the estimate based on those totals. The population denominator is taken from the NIBRS reporting.</p>
+<p>Here we show Honolulu, which has reported to NIBRS since 2018. The rate per 100,000 has increased slightly, from around 15 per 100,000 to now over 30 in 2022. The standard error of the estimate is quite small relative to the year to year variance in the domestic violence rate.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="3500"></p>
+<figcaption>Estimates of Total Domestic Aggravated Assault Rate with Simulated Confidence Intervals in Honolulu</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There are well over 10,000 departments reporting to NIBRS in 2022, and so we cannot provide an overview of all of their trends, below is a select sample of cities. Here we just plot <span class="math inline">\(\hat{T}\)</span>, as the standard errors tend to be very small. But one needs to keep into account when using this estimator that police data itself can have reporting errors <span class="citation" data-cites="maltz2010look">(<a href="#ref-maltz2010look" role="doc-biblioref">Maltz 2010</a>)</span>. Here we can see it is likely the large up-trend in Wichita is due to a reporting error over time. Differences in the levels across each of these jurisdictions could also be due to how police departments determine what counts as an aggravated domestic violent incident. NIBRS is intended to help standardize definitions, but no doubt there will be differences in the nature of reporting (either due to differences in state laws or idiosyncratic local practices).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DV_paper_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="3000"></p>
+<figcaption>Estimates of Total Domestic Aggravated Assault Rates for Selected Jurisdictions</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>The main contribution of this work is a methodology to reliably estimate the dark figure of crime. Using observed police reported statistics, and the estimated non-reporting rate, we can generate an estimate of the total number of crimes. Under-reporting of aggravated domestic violence incidents ranges from 20% to 80% across many of the larger jurisdictions in the US. While we did not uncover any examples where trends substantively changed when taking into account under-reporting, e.g.&nbsp;if reporting rates were going up the up-adjusted totals were also increasing. But accurately knowing the levels of such problems should be an important component in calculating the cost and benefits of reducing such violence.</p>
+<p>One of the main limitations of the technique, as we have shown, is that having inaccurate police reporting data will ultimately result in inaccurate total victimization estimates when using this technique. For those examining individual cities, it is relatively simple to graph your data and detect any anomalies. If one however wishes to use the NIBRS data to generate larger area estimates, such as aggregating up to states, that will be more difficult. It may be at that point simply using the NCVS estimates is more practical. Still, if one wants specific city estimates, we believe our methodology is the best approach.</p>
+<p>We detail several potential extensions of this work. First is in terms of modelling <span class="math inline">\(\hat{p}_i\)</span>. While our model here focuses on solely aggravated domestic violence, once subsetting the NCVS data there are only a handful of observations in any particular year. It is likely the case that one can <em>pool</em> victimization reporting to the police across different crime types. That is, one can estimate a model of reporting rates across all different victimization types, conditional on the persons demographics. This will likely result in more accurate estimates, not just for domestic violence but across all interpersonal crimes.</p>
+<p>The second extension is potentially expanding such work to examine even sub-jurisdiction geographic areas. There is no fundamental reason why this work cannot be applied to smaller areas, and as such can be a way to improve specific spatial forecasts of either domestic violence <span class="citation" data-cites="johnson2024neighborhood wright2011clarifying">(<a href="#ref-johnson2024neighborhood" role="doc-biblioref">Johnson and Snowden 2024</a>; <a href="#ref-wright2011clarifying" role="doc-biblioref">Wright and Benson 2011</a>)</span> or in general all crime types <span class="citation" data-cites="brunton2024estimating">(<a href="#ref-brunton2024estimating" role="doc-biblioref">Brunton-Smith et al. 2024</a>)</span>.</p>
+<p>One aspect of this methodology we cannot stress enough is that to apply this methodology broadly across the US, it is contingent on continued funding of the NCVS. It is only possible to gain relatively accurate estimates of reporting rates for fairly rare crimes given the expansive reach of the NCVS. Simply asking police departments to voluntarily report their data timely and accurately is not enough. There will always be questions of reporting over time, and thus one <em>needs</em> to have estimates of those reporting metrics over time to get a true sense of crime data trends.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-agresti2012categorical" class="csl-entry" role="listitem">
+Agresti, Alan. 2012. <em>Categorical Data Analysis</em>. Vol. 792. John Wiley &amp; Sons.
+</div>
+<div id="ref-brunton2024estimating" class="csl-entry" role="listitem">
+Brunton-Smith, Ian, Alex Cernat, Jose Pina-Sánchez, and David Buil-Gil. 2024. <span>“Estimating the Reliability of Crime Data in Geographic Areas.”</span> <em>The British Journal of Criminology</em>, azae018.
+</div>
+<div id="ref-circo2022open" class="csl-entry" role="listitem">
+Circo, Giovanni, and Andrew Wheeler. 2022. <span>“An Open Source Replication of a Winning Recidivism Prediction Model.”</span> <em>International Journal of Offender Therapy and Comparative Criminology</em>, 0306624X221133004.
+</div>
+<div id="ref-circo2023using" class="csl-entry" role="listitem">
+———. 2023. <span>“Using Every Door Direct Mail Web Push Surveys and Multi-Level Modelling with Post Stratification to Estimate Perceptions of Police at Small Geographies.”</span> <em>CrimRxiv</em>. <a href="https://www.crimrxiv.com/pub/p2pxki1g/release/1">https://www.crimrxiv.com/pub/p2pxki1g/release/1</a>.
+</div>
+<div id="ref-fay2013small" class="csl-entry" role="listitem">
+Fay, Robert E, Michael Planty, and Mamadou S Diallo. 2013. <span>“Small Area Estimates from the National Crime Victimization Survey.”</span> In <em>Proceedings of the Section on Survey Research Methods. American Statistical Association</em>, 1544–57.
+</div>
+<div id="ref-harrell2001regression" class="csl-entry" role="listitem">
+Harrell, Frank E et al. 2001. <em>Regression Modeling Strategies: With Applications to Linear Models, Logistic Regression, and Survival Analysis</em>. Vol. 608. Springer.
+</div>
+<div id="ref-johnson2024neighborhood" class="csl-entry" role="listitem">
+Johnson, Thomas H, and Aleksandra J Snowden. 2024. <span>“Neighborhood Ecological Models of Alcohol Outlet Density and Male–on–Female Domestic Violence: Accounting for Adjacent Place and Neighborhood Characteristics.”</span> <em>Journal of Drug Issues</em> 54 (2): 185–201.
+</div>
+<div id="ref-ncvs2022" class="csl-entry" role="listitem">
+Justice Statistics, Bureau of. 2023. <span>“National Crime Victimization Survey, Concatenated File, [United States], 1992-2022.”</span> <a href="https://doi.org/10.3886/ICPSR38963.v1">https://doi.org/10.3886/ICPSR38963.v1</a>.
+</div>
+<div id="ref-kaplan2022jacob" class="csl-entry" role="listitem">
+Kaplan, Jacob. 2024. <span>“Jacob Kaplan’s Concatenated Files: National Incident-Based Reporting System (NIBRS) Data 1991–2022 V10.”</span> <a href="https://www.openicpsr.org/openicpsr/project/118281/version/V10/view">https://www.openicpsr.org/openicpsr/project/118281/version/V10/view</a>.
+</div>
+<div id="ref-lauritsen2013measuring" class="csl-entry" role="listitem">
+Lauritsen, Janet L, and Maribeth L Rezey. 2013. <em>Measuring the Prevalence of Crime with the National Crime Victimization Survey</em>. US Department of Justice, Office of Justice Programs, Bureau of Justice&nbsp;….
+</div>
+<div id="ref-maltz2010look" class="csl-entry" role="listitem">
+Maltz, Michael D. 2010. <span>“Look Before You Analyze: Visualizing Data in Criminal Justice.”</span> <em>Handbook of Quantitative Criminology</em>, 25–52.
+</div>
+<div id="ref-powers2023self" class="csl-entry" role="listitem">
+Powers, Ráchael A, and Kacy Bleeker. 2023. <span>“Self-Defense and Police Reporting of Intimate Partner Violent Victimization: A Comparison of White, Black, and Hispanic Women Victims.”</span> <em>Journal of Interpersonal Violence</em> 38 (3-4): 4189–4214.
+</div>
+<div id="ref-rstat" class="csl-entry" role="listitem">
+R Core Team. 2022. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-rezey2023crime" class="csl-entry" role="listitem">
+Rezey, Maribeth L, and Janet L Lauritsen. 2023. <span>“Crime Reporting in Chicago: A Comparison of Police and Victim Survey Data, 1999–2018.”</span> <em>Journal of Research in Crime and Delinquency</em> 60 (5): 664–99.
+</div>
+<div id="ref-ggp" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-wright2011clarifying" class="csl-entry" role="listitem">
+Wright, Emily M, and Michael L Benson. 2011. <span>“Clarifying the Effects of Neighborhood Context on Violence <span>‘Behind Closed Doors’</span>.”</span> <em>Justice Quarterly</em> 28 (5): 775–98.
+</div>
+</div>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Using the Agresti-Coull method to estimate the reporting rate for smaller sample sizes reduces the variance of the reporting estimate to be smaller than the survey estimate at almost all sample sizes in this scenario. Which is reasonable if the reporting rates are expected to not be close to 0 or 1 <span class="citation" data-cites="agresti2012categorical">(<a href="#ref-agresti2012categorical" role="doc-biblioref">Agresti 2012</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>It is possible to conduct this same analysis on sub-jurisdiction geographic areas conditional on the geographic locations are available. So the methodology could be expanded to smaller neighborhoods for example.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

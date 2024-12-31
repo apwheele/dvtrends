@@ -1,0 +1,44 @@
+
+Call:
+glm(formula = prep ~ rcs(year, c(1999, 2007, 2015)) + rcs(age, 
+    c(25, 40, 65)) + female + black + nat + asa_isl + mult + 
+    hisp + northeast + midwest + south + west + pop_50_250 + 
+    pop_over250, family = "binomial", data = dva, weights = w)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.7150  -1.1761   0.7046   0.8741   1.9749  
+
+Coefficients:
+                                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         -78.774848  41.725449  -1.888 0.059035 .  
+rcs(year, c(1999, 2007, 2015))year    0.039350   0.020935   1.880 0.060160 .  
+rcs(year, c(1999, 2007, 2015))year'  -0.031507   0.023729  -1.328 0.184261    
+rcs(age, c(25, 40, 65))age            0.029060   0.007746   3.751 0.000176 ***
+rcs(age, c(25, 40, 65))age'          -0.052810   0.019754  -2.673 0.007509 ** 
+female                                0.144507   0.119315   1.211 0.225842    
+black                                 0.134703   0.150098   0.897 0.369489    
+nat                                   0.334916   0.415453   0.806 0.420158    
+asa_isl                              -0.299429   0.418707  -0.715 0.474530    
+mult                                 -1.208871   0.277383  -4.358 1.31e-05 ***
+hisp                                  0.660580   0.188844   3.498 0.000469 ***
+northeast                            -0.272393   0.261864  -1.040 0.298243    
+midwest                              -0.176120   0.243668  -0.723 0.469811    
+south                                -0.161912   0.230854  -0.701 0.483078    
+west                                 -0.402994   0.247645  -1.627 0.103672    
+pop_50_250                            0.152688   0.148826   1.026 0.304914    
+pop_over250                           0.108653   0.157367   0.690 0.489918    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1927.3  on 1526  degrees of freedom
+Residual deviance: 1867.6  on 1510  degrees of freedom
+AIC: 1991.6
+
+Number of Fisher Scoring iterations: 4
+
+          p1        p2
+p1 1.0000000 0.9704782
+p2 0.9704782 1.0000000
