@@ -1,0 +1,35 @@
+High level goal -- I want to make a web application to view rates of reporting victimizations of crime to police.
+
+Place the results in the `/dashboard` folder.
+
+The steps should be:
+
+ - Write R code to convert the ICPSR_39273-V1 (NCVS concatenated file from 1992-2024) to a parquet file. Just write the code, I will review and run this myself
+ - I have notes below on the fields to include in the final file, review `pred_model.R` in the root to see the fields, can also look into the DS0003 codebook
+ - I will then upload the parquet file to R2 manually
+ - after that, you can write a web-app that uses DuckDB WASM to query the parquet file, see GSUBooksQuery.php in the dashboard folder for an example. I will be deploying this in the same php website in the end, but for now make it so I can check the deployment locally in this folder using just `python -m http.server` and a HTML file
+ - Use D3.js to create an application that can
+    - Can choose X axis (age, year, or other category, toggle for bars vs lines, lines have the midpoint as a circle)
+    - Y axis is percent reported
+    - can choose lines for categories (so if category chosen makes multiple lines or a clustered bar chart)
+    - can filter for different categories
+    - toggle to use weights
+    - toggle for standard errors? (agresti-coull or Clopper-Pearson, if line have areas, if bars change to point and error bar ranges)
+ - have the dashboard cite the source, https://www.icpsr.umich.edu/web/NACJD/studies/39273, and the data manipulations
+
+
+## Data variables I want
+
+Focus on crime reporting V4399
+
+ - type of crime (V4529)
+ - victim-offender relationship (nV4245, nV4265, nV4266, nV4271)
+   - create own domestic violence flag
+ - year YEAR
+ - victim gender, V3018
+ - victim race, V3023 and nV3023A (Hispanic 
+ - victim age, V3014
+   - also have age categories
+ - area population (use my recode)
+ - person weight
+ - US Region, nV2127B
